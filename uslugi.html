@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Услуги грузоперевозок | ГрузоТрек</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .hero-gradient {
+        background: linear-gradient(
+          135deg,
+          #f59e0b 0%,
+          #fbbf24 50%,
+          #fcd34d 100%
+        );
+      }
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+      .feature-icon {
+        background-color: #000;
+      }
+      .btn-primary {
+        background-color: #000;
+        color: #fbbf24;
+      }
+      .btn-primary:hover {
+        background-color: #111;
+      }
+      .btn-secondary {
+        background-color: #fbbf24;
+        color: #000;
+      }
+      .btn-secondary:hover {
+        background-color: #fcd34d;
+      }
+      .tab-active {
+        border-bottom: 3px solid #f59e0b;
+        color: #000;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased text-gray-800 bg-gray-100">
+    <!-- Навигация -->
+    <nav class="bg-black shadow-lg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 flex items-center">
+              <i class="fas fa-truck-moving text-yellow-400 text-2xl mr-2"></i>
+              <span class="text-xl font-bold text-yellow-400">ГрузоТрек</span>
+            </div>
+            <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <a
+                href="./index.html"
+                class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Главная</a
+              >
+              <a
+                href="./uslugi.html"
+                class="border-yellow-400 text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Услуги</a
+              >
+              <a
+                href="./tarif.html"
+                class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Тарифы</a
+              >
+              <a
+                href="#"
+                class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >О нас</a
+              >
+              <a
+                href="#"
+                class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Контакты</a
+              >
+            </div>
+          </div>
+          <div class="hidden sm:ml-6 sm:flex sm:items-center">
+            <a
+              href="./lk.html"
+              class="btn-primary px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+              >Личный кабинет</a
+            >
+          </div>
+          <div class="-mr-2 flex items-center sm:hidden">
+            <button
+              type="button"
+              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-yellow-400 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-400"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              id="mobile-menu-button"
+            >
+              <span class="sr-only">Открыть меню</span>
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Мобильное меню -->
+      <div class="sm:hidden hidden" id="mobile-menu">
+        <div class="pt-2 pb-3 space-y-1">
+          <a
+            href="index.html"
+            class="border-transparent text-gray-300 hover:bg-gray-800 hover:border-gray-600 hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+            >Главная</a
+          >
+          <a
+            href="services.html"
+            class="bg-gray-900 border-yellow-400 text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+            >Услуги</a
+          >
+          <a
+            href="pricing.html"
+            class="border-transparent text-gray-300 hover:bg-gray-800 hover:border-gray-600 hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+            >Тарифы</a
+          >
+          <a
+            href="about.html"
+            class="border-transparent text-gray-300 hover:bg-gray-800 hover:border-gray-600 hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+            >О нас</a
+          >
+          <a
+            href="contact.html"
+            class="border-transparent text-gray-300 hover:bg-gray-800 hover:border-gray-600 hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+            >Контакты</a
+          >
+          <a
+            href="admin.html"
+            class="block px-4 py-2 text-base font-medium text-gray-300 hover:text-yellow-400 hover:bg-gray-800"
+            >Личный кабинет</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Герой-секция -->
+    <div class="hero-gradient">
+      <div
+        class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 text-center"
+      >
+        <h1
+          class="text-4xl font-extrabold tracking-tight text-black sm:text-5xl lg:text-6xl"
+        >
+          Наши услуги грузоперевозок
+        </h1>
+        <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-800">
+          Полный спектр логистических решений для вашего бизнеса и личных нужд
+        </p>
+      </div>
+    </div>
+
+    <!-- Табы услуг -->
+    <div class="bg-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="border-b border-gray-200">
+          <nav class="-mb-px flex space-x-8 overflow-x-auto" aria-label="Tabs">
+            <button
+              id="road-tab"
+              class="tab-active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+            >
+              Автоперевозки
+            </button>
+            <button
+              id="railway-tab"
+              class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
+            >
+              Ж/Д перевозки
+            </button>
+            <button
+              id="air-tab"
+              class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
+            >
+              Авиаперевозки
+            </button>
+            <button
+              id="sea-tab"
+              class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
+            >
+              Морские перевозки
+            </button>
+            <button
+              id="special-tab"
+              class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
+            >
+              Спецперевозки
+            </button>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Секция услуг (автоперевозки) -->
+    <div id="road-services" class="service-section py-12 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Карточка услуги 1 -->
+          <div
+            class="service-card bg-white rounded-lg shadow overflow-hidden transition duration-300"
+          >
+            <div class="h-48 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-truck text-6xl text-yellow-500"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Междугородние перевозки
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Быстрая и надежная доставка грузов между городами России с
+                полным контролем на каждом этапе.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-black">от 15 ₽/км</span>
+                <button
+                  class="btn-secondary px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+                >
+                  Подробнее
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Карточка услуги 2 -->
+          <div
+            class="service-card bg-white rounded-lg shadow overflow-hidden transition duration-300"
+          >
+            <div class="h-48 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-boxes text-6xl text-yellow-500"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Городские перевозки
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Оперативная доставка грузов по городу в удобное для вас время с
+                возможностью отслеживания.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-black"
+                  >от 1 500 ₽/рейс</span
+                >
+                <button
+                  class="btn-secondary px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+                >
+                  Подробнее
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Карточка услуги 3 -->
+          <div
+            class="service-card bg-white rounded-lg shadow overflow-hidden transition duration-300"
+          >
+            <div class="h-48 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-shipping-fast text-6xl text-yellow-500"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Экспресс-доставка
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Срочная доставка документов и небольших грузов в течение 24
+                часов по России.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-black">от 3 000 ₽</span>
+                <button
+                  class="btn-secondary px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+                >
+                  Подробнее
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Карточка услуги 4 -->
+          <div
+            class="service-card bg-white rounded-lg shadow overflow-hidden transition duration-300"
+          >
+            <div class="h-48 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-border-all text-6xl text-yellow-500"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Сборные грузы
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Экономичная перевозка небольших партий грузов с консолидацией на
+                наших складах.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-black">от 50 ₽/кг</span>
+                <button
+                  class="btn-secondary px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+                >
+                  Подробнее
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Карточка услуги 5 -->
+          <div
+            class="service-card bg-white rounded-lg shadow overflow-hidden transition duration-300"
+          >
+            <div class="h-48 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-temperature-low text-6xl text-yellow-500"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Рефрижераторные перевозки
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Перевозка скоропортящихся грузов с соблюдением температурного
+                режима.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-black">от 25 ₽/км</span>
+                <button
+                  class="btn-secondary px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+                >
+                  Подробнее
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Карточка услуги 6 -->
+          <div
+            class="service-card bg-white rounded-lg shadow overflow-hidden transition duration-300"
+          >
+            <div class="h-48 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-warehouse text-6xl text-yellow-500"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Складская логистика
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Хранение, комплектация и обработка грузов на наших современных
+                складах.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-black"
+                  >от 100 ₽/м³/сутки</span
+                >
+                <button
+                  class="btn-secondary px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+                >
+                  Подробнее
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Секция услуг (ж/д перевозки - скрыта по умолчанию) -->
+    <div id="railway-services" class="service-section py-12 bg-gray-100 hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Карточка услуги 1 -->
+          <div
+            class="service-card bg-white rounded-lg shadow overflow-hidden transition duration-300"
+          >
+            <div class="h-48 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-train text-6xl text-yellow-500"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Контейнерные перевозки
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Экономичная перевозка грузов в контейнерах по железной дороге по
+                всей России.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-black"
+                  >от 50 000 ₽</span
+                >
+                <button
+                  class="btn-secondary px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+                >
+                  Подробнее
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Карточка услуги 2 -->
+          <div
+            class="service-card bg-white rounded-lg shadow overflow-hidden transition duration-300"
+          >
+            <div class="h-48 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-box-open text-6xl text-yellow-500"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Повагонные отправки
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Перевозка крупных партий грузов в вагонах с возможностью
+                отслеживания.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-black"
+                  >от 80 000 ₽/вагон</span
+                >
+                <button
+                  class="btn-secondary px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+                >
+                  Подробнее
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Карточка услуги 3 -->
+          <div
+            class="service-card bg-white rounded-lg shadow overflow-hidden transition duration-300"
+          >
+            <div class="h-48 bg-gray-200 flex items-center justify-center">
+              <i class="fas fa-temperature-low text-6xl text-yellow-500"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Рефрижераторные перевозки
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Перевозка скоропортящихся грузов в изотермических вагонах с
+                контролем температуры.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-black"
+                  >от 120 000 ₽/вагон</span
+                >
+                <button
+                  class="btn-secondary px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+                >
+                  Подробнее
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Преимущества -->
+    <div class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center">
+          <h2
+            class="text-base text-black font-semibold tracking-wide uppercase"
+          >
+            Почему мы
+          </h2>
+          <p
+            class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
+          >
+            Наши преимущества
+          </p>
+        </div>
+
+        <div class="mt-10">
+          <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="text-center">
+              <div
+                class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-black text-yellow-400 mb-4"
+              >
+                <i class="fas fa-shield-alt text-xl"></i>
+              </div>
+              <h3 class="text-lg font-medium text-gray-900">Надежность</h3>
+              <p class="mt-2 text-base text-gray-600">
+                98% грузов доставляются точно в срок без повреждений
+              </p>
+            </div>
+            <div class="text-center">
+              <div
+                class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-black text-yellow-400 mb-4"
+              >
+                <i class="fas fa-map-marked-alt text-xl"></i>
+              </div>
+              <h3 class="text-lg font-medium text-gray-900">Отслеживание</h3>
+              <p class="mt-2 text-base text-gray-600">
+                Контроль груза онлайн 24/7 через личный кабинет
+              </p>
+            </div>
+            <div class="text-center">
+              <div
+                class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-black text-yellow-400 mb-4"
+              >
+                <i class="fas fa-ruble-sign text-xl"></i>
+              </div>
+              <h3 class="text-lg font-medium text-gray-900">Цены</h3>
+              <p class="mt-2 text-base text-gray-600">
+                Оптимальные тарифы без скрытых платежей
+              </p>
+            </div>
+            <div class="text-center">
+              <div
+                class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-black text-yellow-400 mb-4"
+              >
+                <i class="fas fa-headset text-xl"></i>
+              </div>
+              <h3 class="text-lg font-medium text-gray-900">Поддержка</h3>
+              <p class="mt-2 text-base text-gray-600">
+                Персональный менеджер для каждого клиента
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA секция -->
+    <div class="bg-black">
+      <div
+        class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between"
+      >
+        <h2
+          class="text-3xl font-extrabold tracking-tight text-yellow-400 sm:text-4xl"
+        >
+          <span class="block">Нужна консультация по услугам?</span>
+          <span class="block text-yellow-200"
+            >Наши специалисты помогут подобрать оптимальное решение.</span
+          >
+        </h2>
+        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+          <div class="inline-flex rounded-md shadow">
+            <a
+              href="contact.html"
+              class="btn-secondary inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md transition duration-300"
+            >
+              Связаться с нами
+            </a>
+          </div>
+          <div class="ml-3 inline-flex rounded-md shadow">
+            <a
+              href="tel:+74951234567"
+              class="btn-primary inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md transition duration-300"
+            >
+              <i class="fas fa-phone-alt mr-2"></i> +7 (495) 123-45-67
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="bg-gray-900">
+      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <h3
+              class="text-yellow-400 text-sm font-semibold tracking-wider uppercase mb-4"
+            >
+              Компания
+            </h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="about.html" class="text-gray-300 hover:text-yellow-400"
+                  >О нас</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Карьера</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Новости</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Партнеры</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3
+              class="text-yellow-400 text-sm font-semibold tracking-wider uppercase mb-4"
+            >
+              Услуги
+            </h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="services.html"
+                  class="text-gray-300 hover:text-yellow-400"
+                  >Грузоперевозки</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Логистика</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Складские услуги</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Таможенное оформление</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3
+              class="text-yellow-400 text-sm font-semibold tracking-wider uppercase mb-4"
+            >
+              Поддержка
+            </h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Центр поддержки</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Безопасность</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400">FAQ</a>
+              </li>
+              <li>
+                <a
+                  href="contact.html"
+                  class="text-gray-300 hover:text-yellow-400"
+                  >Контакты</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3
+              class="text-yellow-400 text-sm font-semibold tracking-wider uppercase mb-4"
+            >
+              Контакты
+            </h3>
+            <ul class="space-y-2">
+              <li class="text-gray-300">Москва, ул. Транспортная, 15</li>
+              <li class="text-gray-300">+7 (495) 123-45-67</li>
+              <li class="text-gray-300">info@gruzotrekg.ru</li>
+              <li class="flex space-x-4 mt-4">
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  ><i class="fab fa-facebook-f"></i
+                ></a>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  ><i class="fab fa-linkedin-in"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="mt-8 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between"
+        >
+          <p class="text-gray-400 text-sm">
+            &copy; 2023 ГрузоТрек. Все права защищены.
+          </p>
+          <div class="mt-4 md:mt-0 flex space-x-6">
+            <a href="#" class="text-gray-400 hover:text-yellow-400 text-sm"
+              >Политика конфиденциальности</a
+            >
+            <a href="#" class="text-gray-400 hover:text-yellow-400 text-sm"
+              >Условия использования</a
+            >
+            <a href="#" class="text-gray-400 hover:text-yellow-400 text-sm"
+              >Правовая информация</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Мобильное меню
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      mobileMenuButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+          mobileMenu.classList.remove('hidden');
+          mobileMenu.classList.add('block');
+        } else {
+          mobileMenu.classList.remove('block');
+          mobileMenu.classList.add('hidden');
+        }
+      });
+
+      // Табы услуг
+      const tabs = ['road', 'railway', 'air', 'sea', 'special'];
+
+      tabs.forEach((tab) => {
+        const tabElement = document.getElementById(`${tab}-tab`);
+        tabElement.addEventListener('click', () => {
+          // Удаляем активный класс у всех табов
+          tabs.forEach((t) => {
+            document
+              .getElementById(`${t}-tab`)
+              .classList.remove('tab-active', 'text-black');
+            document.getElementById(`${t}-tab`).classList.add('text-gray-500');
+            document.getElementById(`${t}-services`).classList.add('hidden');
+          });
+
+          // Добавляем активный класс к выбранному табу
+          tabElement.classList.add('tab-active', 'text-black');
+          tabElement.classList.remove('text-gray-500');
+          document.getElementById(`${tab}-services`).classList.remove('hidden');
+        });
+      });
+
+      // Анимация карточек услуг
+      document.addEventListener('DOMContentLoaded', () => {
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        setTimeout(() => {
+          serviceCards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('opacity-100', 'translate-y-0');
+            }, index * 100);
+          });
+        }, 100);
+      });
+    </script>
+  </body>
+</html>

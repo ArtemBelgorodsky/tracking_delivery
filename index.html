@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Грузоперевозки Онлайн | Отслеживание доставки</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .hero-gradient {
+        background: linear-gradient(
+          135deg,
+          #f59e0b 0%,
+          #fbbf24 50%,
+          #fcd34d 100%
+        );
+      }
+      .tracking-input:focus {
+        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.5);
+      }
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+      .stats-item {
+        transition: all 0.3s ease;
+      }
+      .stats-item:hover {
+        transform: scale(1.05);
+      }
+      .feature-icon {
+        background-color: #000;
+      }
+      .btn-primary {
+        background-color: #000;
+        color: #fbbf24;
+      }
+      .btn-primary:hover {
+        background-color: #111;
+      }
+      .btn-secondary {
+        background-color: #fbbf24;
+        color: #000;
+      }
+      .btn-secondary:hover {
+        background-color: #fcd34d;
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased text-gray-800 bg-gray-100">
+    <!-- Навигация -->
+    <nav class="bg-black shadow-lg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 flex items-center">
+              <i class="fas fa-truck-moving text-yellow-400 text-2xl mr-2"></i>
+              <span class="text-xl font-bold text-yellow-400">ГрузоТрек</span>
+            </div>
+            <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <a
+                href="#"
+                class="border-yellow-400 text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Главная</a
+              >
+              <a
+                href="./uslugi.html"
+                class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Услуги</a
+              >
+              <a
+                href="./tarif.html"
+                class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Тарифы</a
+              >
+              <a
+                href="#"
+                class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >О нас</a
+              >
+              <a
+                href="#"
+                class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Контакты</a
+              >
+            </div>
+          </div>
+          <div class="hidden sm:ml-6 sm:flex sm:items-center">
+            <a
+              href="./lk.html"
+              class="btn-primary px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+              >Личный кабинет</a
+            >
+          </div>
+          <div class="-mr-2 flex items-center sm:hidden">
+            <button
+              type="button"
+              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-yellow-400 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-400"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              id="mobile-menu-button"
+            >
+              <span class="sr-only">Открыть меню</span>
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Мобильное меню -->
+      <div class="sm:hidden hidden" id="mobile-menu">
+        <div class="pt-2 pb-3 space-y-1">
+          <a
+            href="#"
+            class="bg-gray-900 border-yellow-400 text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+            >Главная</a
+          >
+          <a
+            href="#"
+            class="border-transparent text-gray-300 hover:bg-gray-800 hover:border-gray-600 hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+            >Услуги</a
+          >
+          <a
+            href="#"
+            class="border-transparent text-gray-300 hover:bg-gray-800 hover:border-gray-600 hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+            >Тарифы</a
+          >
+          <a
+            href="#"
+            class="border-transparent text-gray-300 hover:bg-gray-800 hover:border-gray-600 hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+            >О нас</a
+          >
+          <a
+            href="#"
+            class="border-transparent text-gray-300 hover:bg-gray-800 hover:border-gray-600 hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+            >Контакты</a
+          >
+          <a
+            href="admin.html"
+            class="block px-4 py-2 text-base font-medium text-gray-300 hover:text-yellow-400 hover:bg-gray-800"
+            >Личный кабинет</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Герой-секция -->
+    <div class="hero-gradient">
+      <div
+        class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 text-center"
+      >
+        <h1
+          class="text-4xl font-extrabold tracking-tight text-black sm:text-5xl lg:text-6xl"
+        >
+          Отслеживание грузоперевозок в реальном времени
+        </h1>
+        <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-800">
+          Контролируйте свои грузы на каждом этапе доставки с нашей
+          инновационной системой мониторинга
+        </p>
+        <div
+          class="mt-10 max-w-md mx-auto sm:max-w-none sm:flex sm:justify-center"
+        >
+          <div
+            class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5"
+          >
+            <div class="relative rounded-md shadow-sm">
+              <input
+                type="text"
+                id="tracking-number"
+                class="tracking-input block w-full pl-4 pr-12 py-4 border border-transparent text-base rounded-md focus:outline-none"
+                placeholder="Введите номер груза"
+              />
+              <div
+                class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+              >
+                <i class="fas fa-search text-gray-500"></i>
+              </div>
+            </div>
+            <button
+              id="track-button"
+              class="btn-primary w-full flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-md md:py-4 md:text-lg md:px-8 transition duration-300"
+            >
+              Отследить груз
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Как это работает -->
+    <div class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center">
+          <h2
+            class="text-base text-black font-semibold tracking-wide uppercase"
+          >
+            Процесс
+          </h2>
+          <p
+            class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
+          >
+            Как работает наша система
+          </p>
+          <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+            Простая и прозрачная система отслеживания для вашего удобства
+          </p>
+        </div>
+
+        <div class="mt-10">
+          <div
+            class="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10"
+          >
+            <div
+              class="feature-card relative bg-gray-100 p-6 rounded-lg transition duration-300"
+            >
+              <div
+                class="feature-icon absolute -top-6 left-6 text-yellow-400 rounded-full p-3"
+              >
+                <i class="fas fa-clipboard-list text-xl"></i>
+              </div>
+              <h3 class="mt-6 text-lg font-medium text-gray-900">
+                1. Оформление заказа
+              </h3>
+              <p class="mt-2 text-base text-gray-600">
+                Вы оформляете заказ на перевозку и получаете уникальный номер
+                для отслеживания
+              </p>
+            </div>
+
+            <div
+              class="feature-card relative bg-gray-100 p-6 rounded-lg transition duration-300"
+            >
+              <div
+                class="feature-icon absolute -top-6 left-6 text-yellow-400 rounded-full p-3"
+              >
+                <i class="fas fa-truck-loading text-xl"></i>
+              </div>
+              <h3 class="mt-6 text-lg font-medium text-gray-900">
+                2. Погрузка и отправка
+              </h3>
+              <p class="mt-2 text-base text-gray-600">
+                Наши специалисты забирают груз и отправляют его по указанному
+                маршруту
+              </p>
+            </div>
+
+            <div
+              class="feature-card relative bg-gray-100 p-6 rounded-lg transition duration-300"
+            >
+              <div
+                class="feature-icon absolute -top-6 left-6 text-yellow-400 rounded-full p-3"
+              >
+                <i class="fas fa-map-marked-alt text-xl"></i>
+              </div>
+              <h3 class="mt-6 text-lg font-medium text-gray-900">
+                3. Отслеживание в пути
+              </h3>
+              <p class="mt-2 text-base text-gray-600">
+                Вы можете видеть текущее местоположение груза и статус доставки
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Статистика -->
+    <div class="bg-gray-100 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center mb-12">
+          <h2
+            class="text-base text-black font-semibold tracking-wide uppercase"
+          >
+            Наши показатели
+          </h2>
+          <p
+            class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
+          >
+            Мы гордимся нашей работой
+          </p>
+        </div>
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="stats-item bg-white p-6 rounded-lg shadow text-center">
+            <div
+              class="mx-auto flex items-center justify-center h-12 w-12 rounded-md bg-black text-yellow-400"
+            >
+              <i class="fas fa-truck text-xl"></i>
+            </div>
+            <h3 class="mt-4 text-lg font-medium text-gray-900">15,000+</h3>
+            <p class="mt-1 text-sm text-gray-500">Успешных перевозок</p>
+          </div>
+          <div class="stats-item bg-white p-6 rounded-lg shadow text-center">
+            <div
+              class="mx-auto flex items-center justify-center h-12 w-12 rounded-md bg-black text-yellow-400"
+            >
+              <i class="fas fa-globe-europe text-xl"></i>
+            </div>
+            <h3 class="mt-4 text-lg font-medium text-gray-900">50+</h3>
+            <p class="mt-1 text-sm text-gray-500">Городов доставки</p>
+          </div>
+          <div class="stats-item bg-white p-6 rounded-lg shadow text-center">
+            <div
+              class="mx-auto flex items-center justify-center h-12 w-12 rounded-md bg-black text-yellow-400"
+            >
+              <i class="fas fa-clock text-xl"></i>
+            </div>
+            <h3 class="mt-4 text-lg font-medium text-gray-900">98.7%</h3>
+            <p class="mt-1 text-sm text-gray-500">Своевременных доставок</p>
+          </div>
+          <div class="stats-item bg-white p-6 rounded-lg shadow text-center">
+            <div
+              class="mx-auto flex items-center justify-center h-12 w-12 rounded-md bg-black text-yellow-400"
+            >
+              <i class="fas fa-smile text-xl"></i>
+            </div>
+            <h3 class="mt-4 text-lg font-medium text-gray-900">4.9/5</h3>
+            <p class="mt-1 text-sm text-gray-500">Средняя оценка клиентов</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Карта отслеживания -->
+    <div class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center mb-12">
+          <h2
+            class="text-base text-black font-semibold tracking-wide uppercase"
+          >
+            Отслеживание
+          </h2>
+          <p
+            class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
+          >
+            Пример отслеживания груза
+          </p>
+        </div>
+        <div class="bg-gray-100 rounded-lg p-6 shadow-inner">
+          <div class="flex flex-col md:flex-row">
+            <div class="md:w-1/3 mb-6 md:mb-0">
+              <h3 class="text-lg font-medium text-gray-900 mb-4">
+                Информация о грузе
+              </h3>
+              <div class="space-y-4">
+                <div>
+                  <p class="text-sm font-medium text-gray-500">Номер груза:</p>
+                  <p class="text-gray-900">TRK-78945612</p>
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-gray-500">Отправитель:</p>
+                  <p class="text-gray-900">ООО "ПромТех", Москва</p>
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-gray-500">Получатель:</p>
+                  <p class="text-gray-900">ИП Смирнов А.В., Санкт-Петербург</p>
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-gray-500">Тип груза:</p>
+                  <p class="text-gray-900">
+                    Промышленное оборудование (500 кг)
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="md:w-2/3">
+              <div class="bg-white rounded-lg p-4 shadow">
+                <div
+                  class="relative h-64 bg-gray-200 rounded flex items-center justify-center"
+                >
+                  <img
+                    src="./karta.png"
+                    alt="Карта отслеживания"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="mt-6">
+                  <h4 class="text-sm font-medium text-gray-900 mb-2">
+                    Статус доставки:
+                  </h4>
+                  <div class="flex items-center">
+                    <div class="flex-1">
+                      <div class="flex justify-between text-sm mb-1">
+                        <span class="text-yellow-600 font-medium">Москва</span>
+                        <span class="text-yellow-600 font-medium"
+                          >Санкт-Петербург</span
+                        >
+                      </div>
+                      <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div
+                          class="bg-yellow-500 h-2.5 rounded-full"
+                          style="width: 65%"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-4 grid grid-cols-4 gap-4 text-center text-xs">
+                    <div class="text-yellow-600">
+                      <div
+                        class="h-2 w-2 bg-yellow-600 rounded-full mx-auto mb-1"
+                      ></div>
+                      <p>Принят</p>
+                      <p class="text-gray-500">12.05.2023</p>
+                    </div>
+                    <div class="text-yellow-600">
+                      <div
+                        class="h-2 w-2 bg-yellow-600 rounded-full mx-auto mb-1"
+                      ></div>
+                      <p>В пути</p>
+                      <p class="text-gray-500">13.05.2023</p>
+                    </div>
+                    <div class="text-gray-400">
+                      <div
+                        class="h-2 w-2 bg-gray-400 rounded-full mx-auto mb-1"
+                      ></div>
+                      <p>Таможня</p>
+                      <p class="text-gray-500">Ожидается</p>
+                    </div>
+                    <div class="text-gray-400">
+                      <div
+                        class="h-2 w-2 bg-gray-400 rounded-full mx-auto mb-1"
+                      ></div>
+                      <p>Доставлен</p>
+                      <p class="text-gray-500">Ожидается</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA секция -->
+    <div class="bg-black">
+      <div
+        class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between"
+      >
+        <h2
+          class="text-3xl font-extrabold tracking-tight text-yellow-400 sm:text-4xl"
+        >
+          <span class="block">Готовы начать работу с нами?</span>
+          <span class="block text-yellow-200"
+            >Зарегистрируйтесь и получите доступ к расширенным функциям.</span
+          >
+        </h2>
+        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+          <div class="inline-flex rounded-md shadow">
+            <a
+              href="#"
+              class="btn-secondary inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md transition duration-300"
+            >
+              Регистрация
+            </a>
+          </div>
+          <div class="ml-3 inline-flex rounded-md shadow">
+            <a
+              href="#"
+              class="btn-primary inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md transition duration-300"
+            >
+              Узнать больше
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="bg-gray-900">
+      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <h3
+              class="text-yellow-400 text-sm font-semibold tracking-wider uppercase mb-4"
+            >
+              Компания
+            </h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >О нас</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Карьера</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Новости</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Партнеры</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3
+              class="text-yellow-400 text-sm font-semibold tracking-wider uppercase mb-4"
+            >
+              Услуги
+            </h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Грузоперевозки</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Логистика</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Складские услуги</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Таможенное оформление</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3
+              class="text-yellow-400 text-sm font-semibold tracking-wider uppercase mb-4"
+            >
+              Поддержка
+            </h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Центр поддержки</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Безопасность</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400">FAQ</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-yellow-400"
+                  >Контакты</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3
+              class="text-yellow-400 text-sm font-semibold tracking-wider uppercase mb-4"
+            >
+              Контакты
+            </h3>
+            <ul class="space-y-2">
+              <li class="text-gray-300">Москва, ул. Транспортная, 15</li>
+              <li class="text-gray-300">+7 (495) 123-45-67</li>
+              <li class="text-gray-300">info@gruzotrekg.ru</li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="mt-8 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between"
+        >
+          <p class="text-gray-400 text-sm">
+            &copy; 2025 ГрузоТрек. Все права защищены.
+          </p>
+          <div class="mt-4 md:mt-0 flex space-x-6">
+            <a href="#" class="text-gray-400 hover:text-yellow-400 text-sm"
+              >Политика конфиденциальности</a
+            >
+            <a href="#" class="text-gray-400 hover:text-yellow-400 text-sm"
+              >Условия использования</a
+            >
+            <a href="#" class="text-gray-400 hover:text-yellow-400 text-sm"
+              >Правовая информация</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Мобильное меню
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      mobileMenuButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+          mobileMenu.classList.remove('hidden');
+          mobileMenu.classList.add('block');
+        } else {
+          mobileMenu.classList.remove('block');
+          mobileMenu.classList.add('hidden');
+        }
+      });
+
+      // Кнопка отслеживания
+      const trackButton = document.getElementById('track-button');
+      const trackingInput = document.getElementById('tracking-number');
+
+      trackButton.addEventListener('click', () => {
+        const trackingNumber = trackingInput.value.trim();
+        if (trackingNumber) {
+          alert(
+            `Отслеживание груза с номером: ${trackingNumber}\n(Это демо-версия, функционал будет реализован в полной версии)`
+          );
+        } else {
+          alert('Пожалуйста, введите номер груза для отслеживания');
+        }
+      });
+
+      // Анимация при загрузке
+      document.addEventListener('DOMContentLoaded', () => {
+        const featureCards = document.querySelectorAll('.feature-card');
+        const statsItems = document.querySelectorAll('.stats-item');
+
+        setTimeout(() => {
+          featureCards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('opacity-100', 'translate-y-0');
+            }, index * 100);
+          });
+
+          statsItems.forEach((item, index) => {
+            setTimeout(() => {
+              item.classList.add('opacity-100', 'scale-100');
+            }, index * 100 + 300);
+          });
+        }, 100);
+      });
+    </script>
+  </body>
+</html>

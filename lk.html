@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Личный кабинет | ГрузоТрек</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .sidebar {
+        transition: all 0.3s;
+      }
+      .status-pending {
+        background-color: #fef3c7;
+        color: #92400e;
+      }
+      .status-in-transit {
+        background-color: #dbeafe;
+        color: #1e40af;
+      }
+      .status-delivered {
+        background-color: #dcfce7;
+        color: #166534;
+      }
+      .status-problem {
+        background-color: #fee2e2;
+        color: #991b1b;
+      }
+      .map-container {
+        height: 400px;
+        background-color: #e5e7eb;
+        position: relative;
+        overflow: hidden;
+      }
+      .map-placeholder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: #6b7280;
+      }
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: #ef4444;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased bg-gray-100">
+    <div class="flex h-screen overflow-hidden">
+      <!-- Сайдбар -->
+      <div
+        class="sidebar bg-black text-white w-64 flex-shrink-0 transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out z-10 fixed h-full"
+        id="sidebar"
+      >
+        <div
+          class="flex items-center justify-between p-4 border-b border-gray-800"
+        >
+          <div class="flex items-center">
+            <i class="fas fa-truck-moving text-yellow-400 text-2xl mr-2"></i>
+            <span class="text-xl font-bold text-yellow-400">ГрузоТрек</span>
+          </div>
+          <button
+            id="sidebar-close"
+            class="md:hidden text-gray-400 hover:text-white"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="p-4">
+          <div class="flex items-center space-x-3 p-3 rounded-lg bg-gray-800">
+            <div class="relative">
+              <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="User"
+                class="w-10 h-10 rounded-full"
+              />
+              <span
+                class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-800"
+              ></span>
+            </div>
+            <div>
+              <div class="font-medium">Иван Петров</div>
+              <div class="text-sm text-gray-400">Клиент</div>
+            </div>
+          </div>
+        </div>
+        <nav class="mt-2">
+          <a
+            href="./index.html"
+            class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white"
+          >
+            <i class="fas fa-home mr-3 w-5"></i>
+            Главная
+          </a>
+          <a
+            href="./uslugi.html"
+            class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white"
+          >
+            <i class="fas fa-truck mr-3 w-5"></i>
+            Услуги
+          </a>
+          <a
+            href="./tarif.html"
+            class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white"
+          >
+            <i class="fas fa-tags mr-3 w-5"></i>
+            Тарифы
+          </a>
+          <a
+            href="#"
+            class="flex items-center px-4 py-3 bg-gray-800 text-white"
+          >
+            <i class="fas fa-user-circle mr-3 w-5"></i>
+            Личный кабинет
+          </a>
+          <a
+            href="#"
+            class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white"
+          >
+            <i class="fas fa-map-marked-alt mr-3 w-5"></i>
+            Отслеживание
+          </a>
+          <a
+            href="#"
+            class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white"
+          >
+            <i class="fas fa-history mr-3 w-5"></i>
+            История заказов
+          </a>
+          <a
+            href="#"
+            class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white"
+          >
+            <i class="fas fa-cog mr-3 w-5"></i>
+            Настройки
+          </a>
+        </nav>
+        <div class="absolute bottom-0 w-full p-4 border-t border-gray-800">
+          <a href="#" class="flex items-center text-gray-300 hover:text-white">
+            <i class="fas fa-sign-out-alt mr-3 w-5"></i>
+            Выйти
+          </a>
+        </div>
+      </div>
+
+      <!-- Основное содержимое -->
+      <div class="flex-1 flex flex-col overflow-hidden md:ml-64">
+        <!-- Верхняя панель -->
+        <header class="bg-white shadow-sm">
+          <div class="flex items-center justify-between px-4 py-3">
+            <div class="flex items-center">
+              <button
+                id="sidebar-toggle"
+                class="md:hidden text-gray-600 hover:text-gray-900 mr-2"
+              >
+                <i class="fas fa-bars"></i>
+              </button>
+              <h1 class="text-xl font-semibold text-gray-900">
+                Личный кабинет
+              </h1>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="relative">
+                <button
+                  id="notification-btn"
+                  class="text-gray-600 hover:text-gray-900 relative"
+                >
+                  <i class="fas fa-bell"></i>
+                  <span class="notification-badge">3</span>
+                </button>
+                <div
+                  id="notification-dropdown"
+                  class="hidden absolute right-0 mt-2 w-72 bg-white rounded-md shadow-lg py-1 z-20"
+                >
+                  <div class="px-4 py-2 border-b border-gray-200">
+                    <h3 class="text-sm font-medium text-gray-900">
+                      Уведомления
+                    </h3>
+                  </div>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0 mt-1">
+                        <i class="fas fa-truck text-blue-500"></i>
+                      </div>
+                      <div class="ml-3">
+                        <p class="font-medium">
+                          Груз #TRK-45678 прибыл в Москву
+                        </p>
+                        <p class="text-xs text-gray-500">10 минут назад</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0 mt-1">
+                        <i
+                          class="fas fa-exclamation-triangle text-yellow-500"
+                        ></i>
+                      </div>
+                      <div class="ml-3">
+                        <p class="font-medium">
+                          Задержка доставки груза #TRK-12345
+                        </p>
+                        <p class="text-xs text-gray-500">2 часа назад</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0 mt-1">
+                        <i
+                          class="fas fa-file-invoice-dollar text-green-500"
+                        ></i>
+                      </div>
+                      <div class="ml-3">
+                        <p class="font-medium">Счет #INV-7890 оплачен</p>
+                        <p class="text-xs text-gray-500">Вчера</p>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="px-4 py-2 border-t border-gray-200 text-center">
+                    <a
+                      href="#"
+                      class="text-xs font-medium text-blue-600 hover:text-blue-500"
+                      >Показать все</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="relative">
+                <button
+                  id="user-menu-btn"
+                  class="flex items-center text-sm rounded-full focus:outline-none"
+                >
+                  <span class="sr-only">Открыть меню пользователя</span>
+                  <img
+                    class="h-8 w-8 rounded-full"
+                    src="https://randomuser.me/api/portraits/men/32.jpg"
+                    alt="User"
+                  />
+                </button>
+                <div
+                  id="user-menu-dropdown"
+                  class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20"
+                >
+                  <a
+                    href="admin.html"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Профиль</a
+                  >
+                  <a
+                    href="settings.html"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Настройки</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Выйти</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Основное содержимое -->
+        <main class="flex-1 overflow-y-auto p-4">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Левая колонка -->
+            <div class="lg:col-span-2 space-y-6">
+              <!-- Статистика -->
+              <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">
+                  Общая статистика
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center">
+                      <div
+                        class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4"
+                      >
+                        <i class="fas fa-truck"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-500">Всего перевозок</p>
+                        <p class="text-xl font-semibold">24</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center">
+                      <div
+                        class="p-3 rounded-full bg-green-100 text-green-600 mr-4"
+                      >
+                        <i class="fas fa-check-circle"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-500">Завершено</p>
+                        <p class="text-xl font-semibold">18</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center">
+                      <div
+                        class="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4"
+                      >
+                        <i class="fas fa-spinner"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-500">В процессе</p>
+                        <p class="text-xl font-semibold">5</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Активные перевозки -->
+              <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                  <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-gray-900">
+                      Активные перевозки
+                    </h2>
+                    <a
+                      href="tracking.html"
+                      class="text-sm font-medium text-blue-600 hover:text-blue-500"
+                      >Показать все</a
+                    >
+                  </div>
+                </div>
+                <div class="divide-y divide-gray-200">
+                  <!-- Перевозка 1 -->
+                  <div class="p-6">
+                    <div
+                      class="flex flex-col md:flex-row md:items-center md:justify-between"
+                    >
+                      <div class="mb-4 md:mb-0">
+                        <div class="flex items-center">
+                          <span
+                            class="status-in-transit px-2 py-1 rounded-full text-xs font-medium mr-3"
+                            >В пути</span
+                          >
+                          <span class="text-sm font-medium text-gray-900"
+                            >#TRK-789456</span
+                          >
+                        </div>
+                        <div
+                          class="mt-2 flex items-center text-sm text-gray-500"
+                        >
+                          <i class="fas fa-calendar-alt mr-1"></i>
+                          <span>Ожидается доставка: 15.06.2023</span>
+                        </div>
+                      </div>
+                      <div class="flex items-center">
+                        <div class="mr-6">
+                          <p class="text-sm font-medium text-gray-500">
+                            Откуда
+                          </p>
+                          <p class="text-sm text-gray-900">Санкт-Петербург</p>
+                        </div>
+                        <div class="mr-6">
+                          <p class="text-sm font-medium text-gray-500">Куда</p>
+                          <p class="text-sm text-gray-900">Москва</p>
+                        </div>
+                        <div>
+                          <p class="text-sm font-medium text-gray-500">
+                            Стоимость
+                          </p>
+                          <p class="text-sm text-gray-900">25 000 ₽</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-4">
+                      <div
+                        class="flex items-center justify-between text-xs text-gray-500"
+                      >
+                        <span>Погрузка</span>
+                        <span>В пути</span>
+                        <span>Доставка</span>
+                      </div>
+                      <div class="mt-1">
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                          <div
+                            class="bg-blue-600 h-2 rounded-full"
+                            style="width: 65%"
+                          ></div>
+                        </div>
+                      </div>
+                      <div
+                        class="mt-2 flex justify-between text-xs text-gray-500"
+                      >
+                        <span>10.06.2023</span>
+                        <span>Текущее местоположение: Тверь</span>
+                        <span>15.06.2023</span>
+                      </div>
+                    </div>
+                    <div class="mt-4 flex space-x-3">
+                      <button
+                        class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      >
+                        <i class="fas fa-map-marked-alt mr-1"></i> На карте
+                      </button>
+                      <button
+                        class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      >
+                        <i class="fas fa-file-invoice mr-1"></i> Документы
+                      </button>
+                      <button
+                        class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      >
+                        <i class="fas fa-headset mr-1"></i> Поддержка
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Перевозка 2 -->
+                  <div class="p-6">
+                    <div
+                      class="flex flex-col md:flex-row md:items-center md:justify-between"
+                    >
+                      <div class="mb-4 md:mb-0">
+                        <div class="flex items-center">
+                          <span
+                            class="status-pending px-2 py-1 rounded-full text-xs font-medium mr-3"
+                            >Ожидает</span
+                          >
+                          <span class="text-sm font-medium text-gray-900"
+                            >#TRK-123456</span
+                          >
+                        </div>
+                        <div
+                          class="mt-2 flex items-center text-sm text-gray-500"
+                        >
+                          <i class="fas fa-calendar-alt mr-1"></i>
+                          <span>Ожидается доставка: 20.06.2023</span>
+                        </div>
+                      </div>
+                      <div class="flex items-center">
+                        <div class="mr-6">
+                          <p class="text-sm font-medium text-gray-500">
+                            Откуда
+                          </p>
+                          <p class="text-sm text-gray-900">Новосибирск</p>
+                        </div>
+                        <div class="mr-6">
+                          <p class="text-sm font-medium text-gray-500">Куда</p>
+                          <p class="text-sm text-gray-900">Екатеринбург</p>
+                        </div>
+                        <div>
+                          <p class="text-sm font-medium text-gray-500">
+                            Стоимость
+                          </p>
+                          <p class="text-sm text-gray-900">42 500 ₽</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-4">
+                      <div
+                        class="flex items-center justify-between text-xs text-gray-500"
+                      >
+                        <span>Погрузка</span>
+                        <span>В пути</span>
+                        <span>Доставка</span>
+                      </div>
+                      <div class="mt-1">
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                          <div
+                            class="bg-yellow-500 h-2 rounded-full"
+                            style="width: 15%"
+                          ></div>
+                        </div>
+                      </div>
+                      <div
+                        class="mt-2 flex justify-between text-xs text-gray-500"
+                      >
+                        <span>18.06.2023</span>
+                        <span>Ожидает погрузки</span>
+                        <span>25.06.2023</span>
+                      </div>
+                    </div>
+                    <div class="mt-4 flex space-x-3">
+                      <button
+                        class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      >
+                        <i class="fas fa-map-marked-alt mr-1"></i> На карте
+                      </button>
+                      <button
+                        class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      >
+                        <i class="fas fa-file-invoice mr-1"></i> Документы
+                      </button>
+                      <button
+                        class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      >
+                        <i class="fas fa-headset mr-1"></i> Поддержка
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Перевозка 3 -->
+                  <div class="p-6">
+                    <div
+                      class="flex flex-col md:flex-row md:items-center md:justify-between"
+                    >
+                      <div class="mb-4 md:mb-0">
+                        <div class="flex items-center">
+                          <span
+                            class="status-problem px-2 py-1 rounded-full text-xs font-medium mr-3"
+                            >Проблема</span
+                          >
+                          <span class="text-sm font-medium text-gray-900"
+                            >#TRK-456789</span
+                          >
+                        </div>
+                        <div
+                          class="mt-2 flex items-center text-sm text-gray-500"
+                        >
+                          <i class="fas fa-calendar-alt mr-1"></i>
+                          <span>Ожидалась доставка: 10.06.2023</span>
+                        </div>
+                      </div>
+                      <div class="flex items-center">
+                        <div class="mr-6">
+                          <p class="text-sm font-medium text-gray-500">
+                            Откуда
+                          </p>
+                          <p class="text-sm text-gray-900">Казань</p>
+                        </div>
+                        <div class="mr-6">
+                          <p class="text-sm font-medium text-gray-500">Куда</p>
+                          <p class="text-sm text-gray-900">Ростов-на-Дону</p>
+                        </div>
+                        <div>
+                          <p class="text-sm font-medium text-gray-500">
+                            Стоимость
+                          </p>
+                          <p class="text-sm text-gray-900">18 700 ₽</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-4">
+                      <div
+                        class="flex items-center justify-between text-xs text-gray-500"
+                      >
+                        <span>Погрузка</span>
+                        <span>В пути</span>
+                        <span>Доставка</span>
+                      </div>
+                      <div class="mt-1">
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                          <div
+                            class="bg-red-600 h-2 rounded-full"
+                            style="width: 80%"
+                          ></div>
+                        </div>
+                      </div>
+                      <div
+                        class="mt-2 flex justify-between text-xs text-gray-500"
+                      >
+                        <span>05.06.2023</span>
+                        <span>Задержка из-за погодных условий</span>
+                        <span>15.06.2023</span>
+                      </div>
+                    </div>
+                    <div class="mt-4 flex space-x-3">
+                      <button
+                        class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      >
+                        <i class="fas fa-map-marked-alt mr-1"></i> На карте
+                      </button>
+                      <button
+                        class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      >
+                        <i class="fas fa-file-invoice mr-1"></i> Документы
+                      </button>
+                      <button
+                        class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      >
+                        <i class="fas fa-headset mr-1"></i> Поддержка
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Правая колонка -->
+            <div class="space-y-6">
+              <!-- Карта -->
+              <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                  <h2 class="text-lg font-semibold text-gray-900">
+                    Отслеживание на карте
+                  </h2>
+                </div>
+                <div class="map-container">
+                  <div class="map-placeholder">
+                    <img
+                      src="./karta.png"
+                      alt="Карта отслеживания"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div class="px-6 py-4 border-t border-gray-200">
+                  <button
+                    class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800"
+                  >
+                    <i class="fas fa-expand mr-2"></i> Открыть в полный экран
+                  </button>
+                </div>
+              </div>
+
+              <!-- Последние документы -->
+              <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                  <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-gray-900">
+                      Последние документы
+                    </h2>
+                    <a
+                      href="documents.html"
+                      class="text-sm font-medium text-blue-600 hover:text-blue-500"
+                      >Все документы</a
+                    >
+                  </div>
+                </div>
+                <div class="divide-y divide-gray-200">
+                  <div class="p-4">
+                    <div class="flex items-center">
+                      <div
+                        class="flex-shrink-0 bg-blue-100 rounded-md p-3 text-blue-600"
+                      >
+                        <i class="fas fa-file-invoice"></i>
+                      </div>
+                      <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-900">
+                          Счет-фактура #INV-7890
+                        </p>
+                        <p class="text-sm text-gray-500">12.06.2023</p>
+                      </div>
+                      <div class="ml-auto">
+                        <button class="text-blue-600 hover:text-blue-500">
+                          <i class="fas fa-download"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-4">
+                    <div class="flex items-center">
+                      <div
+                        class="flex-shrink-0 bg-green-100 rounded-md p-3 text-green-600"
+                      >
+                        <i class="fas fa-file-contract"></i>
+                      </div>
+                      <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-900">
+                          Договор #CNT-4567
+                        </p>
+                        <p class="text-sm text-gray-500">05.06.2023</p>
+                      </div>
+                      <div class="ml-auto">
+                        <button class="text-blue-600 hover:text-blue-500">
+                          <i class="fas fa-download"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-4">
+                    <div class="flex items-center">
+                      <div
+                        class="flex-shrink-0 bg-yellow-100 rounded-md p-3 text-yellow-600"
+                      >
+                        <i class="fas fa-receipt"></i>
+                      </div>
+                      <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-900">
+                          ТТН #TTN-1234
+                        </p>
+                        <p class="text-sm text-gray-500">01.06.2023</p>
+                      </div>
+                      <div class="ml-auto">
+                        <button class="text-blue-600 hover:text-blue-500">
+                          <i class="fas fa-download"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Быстрые действия -->
+              <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                  <h2 class="text-lg font-semibold text-gray-900">
+                    Быстрые действия
+                  </h2>
+                </div>
+                <div class="p-4 grid grid-cols-2 gap-4">
+                  <a
+                    href="new-order.html"
+                    class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-md hover:bg-gray-50"
+                  >
+                    <div
+                      class="bg-blue-100 p-3 rounded-full text-blue-600 mb-2"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </div>
+                    <span class="text-sm font-medium text-gray-700"
+                      >Новый заказ</span
+                    >
+                  </a>
+                  <a
+                    href="tracking.html"
+                    class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-md hover:bg-gray-50"
+                  >
+                    <div
+                      class="bg-green-100 p-3 rounded-full text-green-600 mb-2"
+                    >
+                      <i class="fas fa-search"></i>
+                    </div>
+                    <span class="text-sm font-medium text-gray-700"
+                      >Отследить груз</span
+                    >
+                  </a>
+                  <a
+                    href="documents.html"
+                    class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-md hover:bg-gray-50"
+                  >
+                    <div
+                      class="bg-yellow-100 p-3 rounded-full text-yellow-600 mb-2"
+                    >
+                      <i class="fas fa-file-alt"></i>
+                    </div>
+                    <span class="text-sm font-medium text-gray-700"
+                      >Документы</span
+                    >
+                  </a>
+                  <a
+                    href="support.html"
+                    class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-md hover:bg-gray-50"
+                  >
+                    <div class="bg-red-100 p-3 rounded-full text-red-600 mb-2">
+                      <i class="fas fa-headset"></i>
+                    </div>
+                    <span class="text-sm font-medium text-gray-700"
+                      >Поддержка</span
+                    >
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      // Мобильное меню
+      const sidebarToggle = document.getElementById('sidebar-toggle');
+      const sidebarClose = document.getElementById('sidebar-close');
+      const sidebar = document.getElementById('sidebar');
+
+      sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.remove('-translate-x-full');
+      });
+
+      sidebarClose.addEventListener('click', () => {
+        sidebar.classList.add('-translate-x-full');
+      });
+
+      // Выпадающие меню
+      const notificationBtn = document.getElementById('notification-btn');
+      const notificationDropdown = document.getElementById(
+        'notification-dropdown'
+      );
+      const userMenuBtn = document.getElementById('user-menu-btn');
+      const userMenuDropdown = document.getElementById('user-menu-dropdown');
+
+      notificationBtn.addEventListener('click', () => {
+        const isHidden = notificationDropdown.classList.contains('hidden');
+        if (isHidden) {
+          notificationDropdown.classList.remove('hidden');
+          userMenuDropdown.classList.add('hidden');
+        } else {
+          notificationDropdown.classList.add('hidden');
+        }
+      });
+
+      userMenuBtn.addEventListener('click', () => {
+        const isHidden = userMenuDropdown.classList.contains('hidden');
+        if (isHidden) {
+          userMenuDropdown.classList.remove('hidden');
+          notificationDropdown.classList.add('hidden');
+        } else {
+          userMenuDropdown.classList.add('hidden');
+        }
+      });
+
+      // Закрытие меню при клике вне его
+      document.addEventListener('click', (e) => {
+        if (
+          !notificationBtn.contains(e.target) &&
+          !notificationDropdown.contains(e.target)
+        ) {
+          notificationDropdown.classList.add('hidden');
+        }
+        if (
+          !userMenuBtn.contains(e.target) &&
+          !userMenuDropdown.contains(e.target)
+        ) {
+          userMenuDropdown.classList.add('hidden');
+        }
+      });
+
+      // Имитация загрузки данных
+      document.addEventListener('DOMContentLoaded', () => {
+        // Здесь можно добавить загрузку данных через AJAX
+        console.log('Личный кабинет загружен');
+      });
+    </script>
+  </body>
+</html>
